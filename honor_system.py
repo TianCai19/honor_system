@@ -3,13 +3,17 @@ import pygame
 from PIL import Image
 import time
 import json
+from tqdm import tqdm
+import threading
+from logger import Logger
 
 class HonorSystem:
-    def __init__(self, thresholds, badge_dir, music_dir, data_file):
+    def __init__(self, thresholds, badge_dir, music_dir, data_file, log_file):
         self.thresholds = thresholds
         self.badge_dir = badge_dir
         self.music_dir = music_dir
         self.data_file = data_file
+        self.logger = Logger(log_file)
 
         pygame.mixer.init()
 
@@ -21,10 +25,10 @@ class HonorSystem:
             with open(self.data_file, 'r') as file:
                 data = json.load(file)
                 self.score = data.get('score', 0)
-                self.current_rank = data.get('current_rank', 0)
+                self.current_rank = data.get('current_rank', -1)
         else:
             self.score = 0
-            self.current_rank = 0
+            self.current_rank = -1
 
     def save_data(self):
         data = {
@@ -36,6 +40,7 @@ class HonorSystem:
 
     def adjust_score(self, points):
         self.score += points
+        self.logger.log_score_adjustment(self.score)
         self.check_for_badge()
         self.save_data()
 
@@ -48,6 +53,7 @@ class HonorSystem:
 
     def award_badge(self, rank):
         print(f"Congratulations! You've reached rank {rank + 1}!")
+        self.logger.log_rank(rank + 1)
         self.display_badge_and_play_music(rank)
 
     def display_badge_and_play_music(self, rank):
@@ -56,6 +62,9 @@ class HonorSystem:
         badge_image.show()
 
         music_file_path = os.path.join(self.music_dir, f"music{rank + 1}.wav")
+        threading.Thread(target=self.play_music, args=(music_file_path,)).start()
+
+    def play_music(self, music_file_path):
         pygame.mixer.music.load(music_file_path)
         pygame.mixer.music.play()
 
@@ -63,19 +72,7 @@ class HonorSystem:
         while pygame.mixer.music.get_busy():
             time.sleep(1)
 
-# Example usage
-if __name__ == "__main__":
-    thresholds = [100, 200, 300]  # Example thresholds
-    badge_dir = "badges"
-    music_dir = "music"
-    data_file = "honor_system_data.json"
-
-    honor_system = HonorSystem(thresholds, badge_dir, music_dir, data_file)
-
-    # Test the badge display and music play simultaneously
-   # honor_system.display_badge_and_play_music(1)
-    
-    # Adjust the score (add or subtract points)
-    honor_system.adjust_score(50)   # Adjust score by +50 points
-    #honor_system.adjust_score(100)  # Adjust score by +100 points
-    #honor_system.adjust_score(200)  # Adjust score by +200 points
+    def adjust_score_over_time(self, duration_seconds):
+        for _ in tqdm(range(duration_seconds), desc="Adjusting Score"):
+            self.adjust_score(1)
+            time.sleep(1)
