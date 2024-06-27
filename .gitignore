@@ -1,0 +1,11 @@
+# System files
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# JSON data files (placeholder)
+*.json
