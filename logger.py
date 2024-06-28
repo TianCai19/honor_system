@@ -31,6 +31,9 @@ class Logger:
         self.save_logs()
 
     def log_score_adjustment(self, score):
+        #only save one score after every 30
+        if score % 30 != 0:
+            return
         log_entry = {
             'type': 'score',
             'score': score,
@@ -38,3 +41,10 @@ class Logger:
         }
         self.logs.append(log_entry)
         self.save_logs()
+    # a function to get the how many times rank was achieved
+    def get_rank_count(self):
+        count = 0
+        for log in self.logs:
+            if log['type'] == 'rank' :
+                count += 1
+        return count

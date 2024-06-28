@@ -26,6 +26,7 @@ class HonorSystem:
                 data = json.load(file)
                 self.score = data.get('score', 0)
                 self.current_rank = data.get('current_rank', -1)
+
         else:
             self.score = 0
             self.current_rank = -1
@@ -47,12 +48,15 @@ class HonorSystem:
     def check_for_badge(self):
         for i, threshold in enumerate(self.thresholds):
             if self.score >= threshold and i > self.current_rank:
-                self.award_badge(i)
+                self.award_badge(0)
                 self.current_rank = i
                 self.save_data()
+# a new strategy for badge ,get 1 badge at 5 scores and then 10 mins after and 15 and 30 ,always
+        
+
 
     def award_badge(self, rank):
-        print(f"Congratulations! You've reached rank {rank + 1}!")
+        print(f"Congratulations! You've reached rank {rank + 1}! with score {self.score}")
         self.logger.log_rank(rank + 1)
         self.display_badge_and_play_music(rank)
 

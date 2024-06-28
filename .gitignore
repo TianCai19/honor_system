@@ -10,3 +10,8 @@ dist/
 # JSON data files (placeholder)
 *.json
 honor_system_data.json
+
+#python cache files
+__pycache__/
+# the command delete the existing file in a .gitignore file
+# git rm -r --cached .
