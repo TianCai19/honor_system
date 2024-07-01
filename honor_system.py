@@ -48,7 +48,7 @@ class HonorSystem:
     def check_for_badge(self):
         for i, threshold in enumerate(self.thresholds):
             if self.score >= threshold and i > self.current_rank:
-                self.award_badge(0)
+                self.award_badge(i)
                 self.current_rank = i
                 self.save_data()
 # a new strategy for badge ,get 1 badge at 5 scores and then 10 mins after and 15 and 30 ,always
@@ -58,7 +58,7 @@ class HonorSystem:
     def award_badge(self, rank):
         print(f"Congratulations! You've reached rank {rank + 1}! with score {self.score}")
         self.logger.log_rank(rank + 1)
-        self.display_badge_and_play_music(rank)
+        self.display_badge_and_play_music(0)
 
     def display_badge_and_play_music(self, rank):
         badge_image_path = os.path.join(self.badge_dir, f"badge{rank + 1}.png")
@@ -77,6 +77,14 @@ class HonorSystem:
             time.sleep(1)
 
     def adjust_score_over_time(self, duration_seconds):
-        for _ in tqdm(range(duration_seconds), desc="Adjusting Score"):
-            self.adjust_score(1)
-            time.sleep(1)
+        # for _ in tqdm(range(duration_seconds), desc="Adjusting Score"):
+        #     self.adjust_score(1)
+        #     time.sleep(1)
+        while(1):
+            time_for_next_rank=self.thresholds[self.current_rank+1]-self.score
+            for _ in tqdm(range(time_for_next_rank), desc="Adjusting Score"):
+                self.adjust_score(1)
+                time.sleep(1)
+            if self.current_rank==len(self.thresholds)-1:
+                break
+

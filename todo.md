@@ -5,7 +5,7 @@
 - [ ] a class to better organize the badge
 - [ ] use chatgpt to add a auto generated badge
 - [ ] use chatgpt to give more human like feedback
-- [ ]  
+- [ ] move to online on the aws machine ,so that i can directly share with my friends and encourage each othere 
 - [x] Feature 3 (completed)
 
 ## Bugs to Fix

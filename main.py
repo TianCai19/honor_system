@@ -4,9 +4,9 @@ import logger
 
 if __name__ == "__main__":
     threshold=0
-    mins_intervals = [1, 5, 10,15,30]
+    mins_intervals = [0,1, 5, 10,15,30]
     thresholds = []
-    for i in range(1, 10):
+    for i in range(1, 20):
         if i <len(mins_intervals):
             interval=mins_intervals[i-1]*60
         else:
