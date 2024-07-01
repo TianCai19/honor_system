@@ -15,3 +15,7 @@ honor_system_data.json
 __pycache__/
 # the command delete the existing file in a .gitignore file
 # git rm -r --cached .
+
+
+#key for llm api
+key.env
