@@ -62,7 +62,7 @@ class HonorSystem:
         print(f"Congratulations! You've reached rank {rank + 1}! with score {self.score}")
         self.logger.log_rank(rank + 1)
         self.display_badge_and_play_music(0)
-        threading.Thread(target=self.show_encouragement).start()
+        threading.Thread(target=show_encouragement(self.score,self.current_rank)).start()
 
     def display_badge_and_play_music(self, rank):
         badge_image_path = os.path.join(self.badge_dir, f"badge{rank + 1}.png")

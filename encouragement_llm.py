@@ -35,10 +35,8 @@ def chatbot(prompt):
 
 
 # a function that shows with the ecougement and feedback
-def show_encouragement(work_time_sec,rank):
-    work_time_sec=1500
+def show_encouragement(work_time_sec=1500,level=4):
     work_time_min=work_time_sec/60
-    level=4
     student_name="Cody"
     
     # promt ,you are a enournging person,u should encourage a students who is studying 
@@ -53,8 +51,8 @@ def show_encouragement(work_time_sec,rank):
         mutiple lines are allowed but be breif
         show with more care and love using !! and some emojis in terminal 
         """
-    return chatbot(prompt)
-
+    #return chatbot(prompt)
+    print(chatbot(prompt))
 
 # a test in if main
 
@@ -67,4 +65,4 @@ if __name__ == "__main__":
     
     rank=4
     
-    print(show_encouragement(work_time_sec,rank))
+    show_encouragement(work_time_sec,rank)
