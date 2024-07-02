@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # output the current score and rank and badge/rank number
     # get the data from the log file
     print(f"Current score: {honor_system.score}")
-    print(f"Current rank: {honor_system.current_rank + 1}")
+    print(f"Current rank: {honor_system.current_rank }")
     print(f"Current rank count: {honor_system.logger.get_rank_count()}")
     # calulate the score needed for the next rank
     next_rank = honor_system.current_rank + 1

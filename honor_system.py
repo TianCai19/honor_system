@@ -32,7 +32,7 @@ class HonorSystem:
 
         else:
             self.score = 0
-            self.current_rank = -1
+            self.current_rank = 0
 
     def save_data(self):
         data = {
