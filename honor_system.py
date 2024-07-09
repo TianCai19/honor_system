@@ -6,6 +6,11 @@ import json
 from tqdm import tqdm
 import threading
 from logger import Logger
+import time
+import subprocess
+
+def activate_terminal():
+    subprocess.run(["osascript", "-e", 'tell application "Terminal" to activate'])
 
 # add llm enouragement chatbot
 from encouragement_llm import show_encouragement
@@ -61,8 +66,9 @@ class HonorSystem:
     def award_badge(self, rank):
         print(f"Congratulations! You've reached rank {rank + 1}! with score {self.score}")
         self.logger.log_rank(rank + 1)
-        self.display_badge_and_play_music(0)
+        #self.display_badge_and_play_music(0)
         threading.Thread(target=show_encouragement(self.score,self.current_rank)).start()
+        threading.Thread(target=activate_terminal).start()
 
     def display_badge_and_play_music(self, rank):
         badge_image_path = os.path.join(self.badge_dir, f"badge{rank + 1}.png")
