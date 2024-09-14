@@ -19,3 +19,6 @@ __pycache__/
 
 #key for llm api
 key.env
+
+## log or chat history
+chathistory/*
