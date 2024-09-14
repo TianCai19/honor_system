@@ -1,0 +1,6 @@
+Flask
+python-dotenv
+pygame
+Pillow
+tqdm
+watchdog

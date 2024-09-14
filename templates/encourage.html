@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>发送鼓励</h2>
+<form method="post" action="{{ url_for('encourage') }}">
+    <div class="mb-3">
+        <label for="work_time_sec" class="form-label">工作时间（秒）</label>
+        <input type="number" class="form-control" id="work_time_sec" name="work_time_sec" value="1500" required>
+    </div>
+    <div class="mb-3">
+        <label for="rank" class="form-label">等级</label>
+        <input type="number" class="form-control" id="rank" name="rank" value="4" required>
+    </div>
+    <div class="mb-3">
+        <label for="player_feeling" class="form-label">你的感受</label>
+        <input type="text" class="form-control" id="player_feeling" name="player_feeling" required>
+    </div>
+    <div class="mb-3">
+        <label for="player_activity" class="form-label">你做了什么</label>
+        <input type="text" class="form-control" id="player_activity" name="player_activity" required>
+    </div>
+    <button type="submit" class="btn btn-primary">发送鼓励</button>
+</form>
+{% endblock %}

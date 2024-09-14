@@ -36,48 +36,26 @@ def chatbot(prompt):
     a = spark.generate([messages], callbacks=[handler])
     return a.generations[0][0].message.content
 
-
-# a function that shows with the ecougement and feedback
-def show_encouragement(work_time_sec=1500,rank=4):
-    work_time_min=work_time_sec/60
-    student_name="Cody"
+def show_encouragement(work_time_sec=1500, rank=4, player_feeling="", player_activity=""):
+    work_time_min = work_time_sec / 60
+    student_name = "Cody"
     
-    
- # Ask the player how they feel and what they did in the past time
-    player_feeling = input("How do you feel right now? ")
-    player_activity = input("What did you do in the past time? ")
-
-    # print(f"You said you're feeling {player_feeling} and you did {player_activity}.")
-        
-    
-    # promt ,you are a enournging person,u should encourage a students who is studying 
-    # i will tell you how long he has been studying and what level he is in
-    # give hime feedback and encourage him, tell him some nice words and give care to him
-    # 
-    prompt=f"""you are a encouraging person,u should encourage a students who is studying,
+    # 构建提示信息
+    prompt = f"""you are an encouraging person, you should encourage a student who is studying,
       he has been studying for {work_time_min} minutes and he is in level {rank},
-      he is feeling{player_feeling},and he did :{player_activity}.
+      he is feeling {player_feeling}, and he did: {player_activity}.
         give him feedback and encourage him, tell him some nice words and give care to him
         student name is {student_name}
-        u can quote some famous words to encourage him,like chinese poem ,famous people words,
-        mutiple lines are allowed but be breif
+        you can quote some famous words to encourage him, like Chinese poems, famous people's words,
+        multiple lines are allowed but be brief
         show with more care and love using !! and some emojis in terminal 
         """
-    #return chatbot(prompt)
-    botanswer=chatbot(prompt)
-    print(botanswer)
-    
-
-    # 保存每次的输出到一个文件夹里 chathistory 的一个文件，按照日期命名
-    #包含时间，恢复，rank 什么的情况
-        
-    # Modify the part where you call save_chat_history to include the new parameters
-    # Assuming the variables work_time_min, level, player_feeling, player_activity, student_name, and rank are defined above
     botanswer = chatbot(prompt)
     print(botanswer)
-    save_chat_history(botanswer, work_time_min,  player_feeling, player_activity, student_name, rank)
-        
+    
+    return botanswer
 
+    save_chat_history(botanswer, work_time_min, player_feeling, player_activity, student_name, rank)
 
 def save_chat_history(response, work_time_min,  player_feeling, player_activity, student_name, rank):
     folder_name = "chathistory"

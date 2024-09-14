@@ -1,2 +1,3 @@
+#!/bin/bash
 cd /Users/zz/code/honor_system
-python main.py
+python app.py

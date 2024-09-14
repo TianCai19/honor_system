@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>仪表盘</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h4>当前分数: {{ score }}</h4>
+        <h4>当前等级: {{ rank }}</h4>
+        <h4>等级达成次数: {{ rank_count }}</h4>
+        {% if score_needed %}
+            <p>下一级别需要分数: {{ score_needed }}</p>
+            <p>预计需要时间: {{ time_needed }} 分钟</p>
+        {% else %}
+            <p>你已经达到了最高等级！</p>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h4>徽章展示</h4>
+        <img src="{{ url_for('static', filename='badges/badge' ~ badges|string ~ '.png') }}" 
+             alt="Badge {{ badges }}" class="img-fluid">
+    </div>
+</div>
+
+<hr>
+
+<h4>调整分数</h4>
+<form action="{{ url_for('adjust_score') }}" method="post" class="row g-3">
+    <div class="col-auto">
+        <input type="number" name="points" class="form-control" placeholder="输入分数" required>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success mb-3">增加分数</button>
+    </div>
+</form>
+{% endblock %}
