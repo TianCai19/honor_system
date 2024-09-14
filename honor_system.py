@@ -23,7 +23,10 @@ class HonorSystem:
         self.data_file = data_file
         self.logger = Logger(log_file)
 
-        pygame.mixer.init()
+        # try:
+        #     pygame.mixer.init()
+        # except pygame.error as e:
+        #     print(f"Error initializing pygame.mixer: {e}")
 
         # Load data from file
         self.load_data()
@@ -79,12 +82,13 @@ class HonorSystem:
         threading.Thread(target=self.play_music, args=(music_file_path,)).start()
 
     def play_music(self, music_file_path):
-        pygame.mixer.music.load(music_file_path)
-        pygame.mixer.music.play()
+        pass
+        # pygame.mixer.music.load(music_file_path)
+        # pygame.mixer.music.play()
 
-        # Wait for the music to finish playing
-        while pygame.mixer.music.get_busy():
-            time.sleep(1)
+        # # Wait for the music to finish playing
+        # while pygame.mixer.music.get_busy():
+        #     time.sleep(1)
 
     def adjust_score_over_time(self, duration_seconds):
         # for _ in tqdm(range(duration_seconds), desc="Adjusting Score"):
