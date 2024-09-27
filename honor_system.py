@@ -8,12 +8,12 @@ import threading
 from logger import Logger
 import time
 import subprocess
+from encouragement_llm import ChatBot
 
 def activate_terminal():
     subprocess.run(["osascript", "-e", 'tell application "Terminal" to activate'])
 
-# add llm enouragement chatbot
-from encouragement_llm import show_encouragement
+
 
 class HonorSystem:
     def __init__(self, thresholds, badge_dir, music_dir, data_file, log_file):
@@ -70,7 +70,7 @@ class HonorSystem:
         print(f"Congratulations! You've reached rank {rank + 1}! with score {self.score}")
         self.logger.log_rank(rank + 1)
         #self.display_badge_and_play_music(0)
-        threading.Thread(target=show_encouragement(self.score,self.current_rank)).start()
+        threading.Thread(target=ChatBot(model_name='sparkai').show_encouragement(self.score,self.current_rank)).start()
         threading.Thread(target=activate_terminal).start()
 
     def display_badge_and_play_music(self, rank):
