@@ -15,7 +15,7 @@ if __name__ == "__main__":
             interval=mins_intervals[-1]*60
         threshold+=interval
         thresholds.append(threshold)
-    print(thresholds)
+    logger.info(thresholds)
   
     badge_dir = "badges"
     music_dir = "music"
@@ -28,23 +28,23 @@ if __name__ == "__main__":
 
     # output the current score and rank and badge/rank number
     # get the data from the log file
-    print(f"Current score: {honor_system.score}")
-    print(f"Current rank: {honor_system.current_rank }")
-    print(f"Current rank count: {honor_system.logger.get_rank_count()}")
+    logger.info(f"Current score: {honor_system.score}")
+    logger.info(f"Current rank: {honor_system.current_rank }")
+    logger.info(f"Current rank count: {honor_system.logger.get_rank_count()}")
     # calulate the score needed for the next rank
     next_rank = honor_system.current_rank + 1
     if next_rank < len(thresholds):
         score_needed = thresholds[next_rank] - honor_system.score
-        print(f"Score needed for next rank: {score_needed}")
+        logger.info(f"Score needed for next rank: {score_needed}")
         # each score is 1 second,caculate the minutes needed for the next rank
-        print(f"Time needed for next rank: {score_needed/60} minutes")
+        logger.info(f"Time needed for next rank: {score_needed/60} minutes")
     else:
-        print("You've reached the highest rank!")
+        logger.info("You've reached the highest rank!")
 
 
     # Adjust the score over a duration of time (e.g., 50 seconds)
     honor_system.adjust_score_over_time(thresholds[-1])  # Adjust score for 50 seconds
 
     # Print out the current score and rank
-    print(f"Current score: {honor_system.score}")
-    print(f"Current rank: {honor_system.current_rank + 1}")
+    logger.info(f"Current score: {honor_system.score}")
+    logger.info(f"Current rank: {honor_system.current_rank + 1}")
