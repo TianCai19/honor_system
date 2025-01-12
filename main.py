@@ -1,8 +1,10 @@
 from honor_system import HonorSystem
 import datetime
 import logger
+import os
 
 if __name__ == "__main__":
+    os.makedirs("data", exist_ok=True)
     threshold=0
     mins_intervals = [0,1, 5, 10,15,30]
     thresholds = []
