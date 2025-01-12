@@ -22,3 +22,5 @@ key.env
 
 ## log or chat history
 chathistory/*
+
+.env
