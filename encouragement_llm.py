@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 def chatbot(prompt):
-    load_dotenv('key.env')
+    load_dotenv('.env')
     response = completion(
         model="deepseek/deepseek-chat",
         messages=[{"role": "user", "content": prompt}],
