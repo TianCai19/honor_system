@@ -1,8 +1,6 @@
-sparkai
-python-dotenv
-pygame
-Pillow
-tqdm
-progress
-
-litellm
+litellm>=1.58.1
+pillow>=11.1.0
+progress>=1.6
+pygame>=2.6.1
+python-dotenv>=1.0.1
+tqdm>=4.67.1
