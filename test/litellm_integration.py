@@ -10,6 +10,6 @@ response = completion(
     messages=[
        {"role": "user", "content": "hello from litellm"}
    ],
-   api_key=os.getenv('DEEPSEEK_API_KEY')
+#    api_key=os.getenv('DEEPSEEK_API_KEY')
 )
 print(response['choices'][0]['message']['content'])
